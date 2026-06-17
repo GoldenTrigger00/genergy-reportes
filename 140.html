@@ -5,153 +5,1378 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Reporte Solar</title>
+<title>Reporte Genergy - Luis y Katia </title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 body{
-    font-family: Arial, sans-serif;
-    background:#f5f5f5;
-    margin:30px;
+  font-family:Arial,sans-serif;
+  background:#f3f4f6;
+  padding:25px;
+  color:#1f2937;
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:15px;
 }
 
 .header{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    margin-bottom:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  border-bottom:4px solid #5ca038;
+  padding-bottom:20px;
+  margin-bottom:25px;
+  gap:20px;
 }
 
-.cards{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
+.logo{
+  font-size:38px;
+  font-weight:bold;
+  color:#5ca038;
+  letter-spacing:1px;
 }
 
-.card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    min-width:220px;
-    box-shadow:0 2px 5px rgba(0,0,0,.1);
+.tagline{
+  font-size:12px;
+  color:#6b7280;
+  margin-top:2px;
 }
 
-.chart-container{
-    background:white;
-    margin-top:20px;
-    padding:20px;
-    border-radius:10px;
+.report-title{
+  text-align:right;
 }
 
-h1{
-    color:#0f766e;
+.report-title h1{
+  font-size:16px;
+  letter-spacing:2px;
+  color:#6b7280;
+}
+
+.report-title h2{
+  font-size:30px;
+  margin-top:4px;
+}
+
+.report-title .subtitle{
+  font-size:13px;
+  color:#5ca038;
+  font-weight:bold;
+  margin-top:4px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.info-card{
+  background:#f8fafc;
+  padding:18px;
+  border-radius:10px;
+}
+
+.info-card span{
+  font-size:12px;
+  color:#6b7280;
+  display:block;
+  margin-bottom:6px;
+  letter-spacing:1px;
+}
+
+.info-card strong{
+  font-size:16px;
+}
+
+.kpis-energia{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.kpi-box{
+  padding:20px;
+  border-radius:10px;
+}
+
+.kpi-box .kpi-title{
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+.kpi-box .kpi-value{
+  font-size:30px;
+  font-weight:bold;
+}
+
+.kpi-box .kpi-value .unit{
+  font-size:16px;
+  font-weight:normal;
+}
+
+.kpi-box .kpi-sub{
+  font-size:12px;
+  color:#6b7280;
+  margin-top:8px;
+}
+
+.kpi-green{
+  background:#eef5ea;
+  border-left:4px solid #5ca038;
+}
+.kpi-green .kpi-title{ color:#5ca038; }
+
+.kpi-blue{
+  background:#eef2fb;
+  border-left:4px solid #2563eb;
+}
+.kpi-blue .kpi-title{ color:#2563eb; }
+
+.kpi-light{
+  background:#f3fbe9;
+  border-left:4px solid #8bc34a;
+}
+.kpi-light .kpi-title{ color:#5b8a1f; }
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.kpi{
+  background:#f8fafc;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.kpi .kpi-title{
+  font-size:12px;
+  color:#6b7280;
+  margin-bottom:8px;
+}
+
+.kpi .kpi-value{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.chart-box{
+  background:white;
+  border:1px solid #e5e7eb;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:25px;
+}
+
+.section-title{
+  margin-bottom:15px;
+  font-size:18px;
+  color:#5ca038;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    margin-top:20px;
-}
-
-th,td{
-    border:1px solid #ddd;
-    padding:8px;
-    text-align:center;
+  width:100%;
+  border-collapse:collapse;
+  margin-bottom:25px;
 }
 
 th{
-    background:#0f766e;
-    color:white;
+  background:#5ca038;
+  color:white;
+  padding:10px;
+  font-size:13px;
+}
+
+td{
+  padding:8px;
+  border:1px solid #ddd;
+  text-align:center;
+  font-size:13px;
+}
+
+.footer{
+  margin-top:10px;
+  padding:18px;
+  text-align:center;
+  background:#eef5ea;
+  border-radius:10px;
+  font-size:13px;
+  color:#4b5563;
 }
 
 </style>
-
 </head>
 
 <body>
 
+<div class="container">
+
 <div class="header">
 
-<h1>Reporte Solar</h1>
+<div>
+<div class="logo">GENERGY</div>
+<div class="tagline">Energía que te sirve</div>
+</div>
 
+<div class="report-title">
+<h1>REPORTE DE DESEMPEÑO</h1>
 <h2>Luis y Katia </h2>
-
-<p><b>Cliente:</b> 140</p>
-
-<p><b>Dirección:</b> MONTES HIMALAYA  514</p>
-
-<p><b>Tarifa:</b> 1c</p>
-
-<p><b>Sistema:</b> 14.58 kWp</p>
-
-<p><b>Fecha conexión:</b> 5/9/2018</p>
-
-</div>
-
-<div class="cards">
-
-<div class="card">
-<h3>Consumo Total</h3>
-<h2>20,610</h2>
-kWh
-</div>
-
-<div class="card">
-<h3>Producción Total</h3>
-<h2>171,518.55</h2>
-kWh
-</div>
-
-<div class="card">
-<h3>Ahorro Total</h3>
-<h2>$1,042,869.484</h2>
-MXN
+<div class="subtitle">Sistema 14.58 kWp &middot; Tarifa 1c</div>
 </div>
 
 </div>
 
-<div class="chart-container">
-<h2>Consumo vs Producción</h2>
+<div class="info-grid">
+
+<div class="info-card">
+<span>CLIENTE</span>
+<strong>140</strong>
+</div>
+
+<div class="info-card">
+<span>PERÍODO</span>
+<strong>1/1/2017 a 1/12/2026</strong>
+</div>
+
+<div class="info-card">
+<span>CAPACIDAD INSTALADA</span>
+<strong>14.58 kWp</strong>
+</div>
+
+<div class="info-card">
+<span>FECHA DE CONEXIÓN</span>
+<strong>5/9/2018</strong>
+</div>
+
+</div>
+
+<div class="kpis-energia">
+
+<div class="kpi-box kpi-green">
+<div class="kpi-title">PRODUCCIÓN TOTAL</div>
+<div class="kpi-value">171,519 <span class="unit">kWh</span></div>
+<div class="kpi-sub">Promedio mensual: 1,429 kWh</div>
+</div>
+
+<div class="kpi-box kpi-blue">
+<div class="kpi-title">CONSUMO TOTAL</div>
+<div class="kpi-value">20,610 <span class="unit">kWh</span></div>
+<div class="kpi-sub">Promedio mensual: 172 kWh</div>
+</div>
+
+<div class="kpi-box kpi-light">
+<div class="kpi-title">DESEMPEÑO DEL SISTEMA</div>
+<div class="kpi-value">832.2%</div>
+<div class="kpi-sub">Mejor mes: Jul 2023 (2,492 kWh)</div>
+</div>
+
+</div>
+
+<div class="section-title">Impacto Financiero</div>
+
+<div class="kpis">
+
+<div class="kpi">
+<div class="kpi-title">AHORRO TOTAL</div>
+<div class="kpi-value">$1,042,869</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">PAGO CFE TOTAL</div>
+<div class="kpi-value">$41,684</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">AHORRO PROMEDIO MENSUAL</div>
+<div class="kpi-value">$8,691</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-title">% AHORRO vs FACTURA SIN SISTEMA</div>
+<div class="kpi-value">96.2%</div>
+</div>
+
+</div>
+
+<div class="chart-box">
+<div class="section-title">Consumo vs Producción Mensual (kWh)</div>
 <canvas id="graficaPrincipal"></canvas>
+</div>
+
+<div class="chart-box">
+<div class="section-title">Ahorro Mensual (MXN)</div>
+<canvas id="graficaAhorro"></canvas>
+</div>
+
+<div class="section-title">Historial Detallado</div>
+
+<table>
+
+<thead>
+<tr>
+<th>Período</th>
+<th>Consumo (kWh)</th>
+<th>Producción (kWh)</th>
+<th>Ahorro (MXN)</th>
+<th>Pago CFE (MXN)</th>
+<th>% Ahorro</th>
+</tr>
+</thead>
+
+<tbody>
+
+
+<tr>
+<td>Ene 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Feb 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Mar 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Abr 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>May 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Jun 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Jul 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Ago 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Sep 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Oct 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Nov 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Dic 2017</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Ene 2018</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Feb 2018</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Mar 2018</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Abr 2018</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>May 2018</td>
+<td>830</td>
+<td>1,715</td>
+<td>$8,451</td>
+<td>$1,682</td>
+<td>83.4%</td>
+</tr>
+<tr>
+<td>Jun 2018</td>
+<td>780</td>
+<td>2,180</td>
+<td>$11,309</td>
+<td>$1,520</td>
+<td>88.2%</td>
+</tr>
+<tr>
+<td>Jul 2018</td>
+<td>1,174</td>
+<td>2,390</td>
+<td>$12,689</td>
+<td>$4,358</td>
+<td>74.4%</td>
+</tr>
+<tr>
+<td>Ago 2018</td>
+<td>1,174</td>
+<td>2,390</td>
+<td>$12,772</td>
+<td>$4,358</td>
+<td>74.6%</td>
+</tr>
+<tr>
+<td>Sep 2018</td>
+<td>369</td>
+<td>1,490</td>
+<td>$7,781</td>
+<td>$0</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Oct 2018</td>
+<td>369</td>
+<td>1,230</td>
+<td>$6,423</td>
+<td>$0</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Nov 2018</td>
+<td>6</td>
+<td>1,150</td>
+<td>$6,030</td>
+<td>$0</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Dic 2018</td>
+<td>6</td>
+<td>1,280</td>
+<td>$6,726</td>
+<td>$0</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Ene 2019</td>
+<td>-193</td>
+<td>1,310</td>
+<td>$7,587</td>
+<td>$23</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Feb 2019</td>
+<td>-193</td>
+<td>1,280</td>
+<td>$7,085</td>
+<td>$23</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Mar 2019</td>
+<td>-349</td>
+<td>1,320</td>
+<td>$6,972</td>
+<td>$23</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Abr 2019</td>
+<td>-349</td>
+<td>2,070</td>
+<td>$10,633</td>
+<td>$23</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>May 2019</td>
+<td>28</td>
+<td>1,710</td>
+<td>$8,914</td>
+<td>$23</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Jun 2019</td>
+<td>28</td>
+<td>2,130</td>
+<td>$11,101</td>
+<td>$23</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jul 2019</td>
+<td>778</td>
+<td>2,190</td>
+<td>$11,414</td>
+<td>$756</td>
+<td>93.8%</td>
+</tr>
+<tr>
+<td>Ago 2019</td>
+<td>778</td>
+<td>2,250</td>
+<td>$11,727</td>
+<td>$756</td>
+<td>93.9%</td>
+</tr>
+<tr>
+<td>Sep 2019</td>
+<td>162</td>
+<td>1,720</td>
+<td>$8,964</td>
+<td>$163</td>
+<td>98.2%</td>
+</tr>
+<tr>
+<td>Oct 2019</td>
+<td>162</td>
+<td>1,706</td>
+<td>$8,890</td>
+<td>$163</td>
+<td>98.2%</td>
+</tr>
+<tr>
+<td>Nov 2019</td>
+<td>-377</td>
+<td>1,340</td>
+<td>$6,984</td>
+<td>$24</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Dic 2019</td>
+<td>-377</td>
+<td>1,323</td>
+<td>$6,896</td>
+<td>$24</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Ene 2020</td>
+<td>-297</td>
+<td>1,280</td>
+<td>$6,079</td>
+<td>$24</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Feb 2020</td>
+<td>-297</td>
+<td>1,410</td>
+<td>$6,663</td>
+<td>$24</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Mar 2020</td>
+<td>378</td>
+<td>1,540</td>
+<td>$7,122</td>
+<td>$23</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Abr 2020</td>
+<td>378</td>
+<td>1,630</td>
+<td>$7,544</td>
+<td>$23</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>May 2020</td>
+<td>653</td>
+<td>2,035</td>
+<td>$9,407</td>
+<td>$1,176</td>
+<td>88.9%</td>
+</tr>
+<tr>
+<td>Jun 2020</td>
+<td>653</td>
+<td>2,050</td>
+<td>$9,885</td>
+<td>$1,176</td>
+<td>89.4%</td>
+</tr>
+<tr>
+<td>Jul 2020</td>
+<td>967</td>
+<td>1,938</td>
+<td>$9,320</td>
+<td>$2,271</td>
+<td>80.4%</td>
+</tr>
+<tr>
+<td>Ago 2020</td>
+<td>967</td>
+<td>2,308</td>
+<td>$11,115</td>
+<td>$2,271</td>
+<td>83.0%</td>
+</tr>
+<tr>
+<td>Sep 2020</td>
+<td>46</td>
+<td>1,494</td>
+<td>$7,390</td>
+<td>$45</td>
+<td>99.4%</td>
+</tr>
+<tr>
+<td>Oct 2020</td>
+<td>46</td>
+<td>1,833</td>
+<td>$9,387</td>
+<td>$45</td>
+<td>99.5%</td>
+</tr>
+<tr>
+<td>Nov 2020</td>
+<td>-75</td>
+<td>1,255</td>
+<td>$6,331</td>
+<td>$25</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Dic 2020</td>
+<td>-75</td>
+<td>1,500</td>
+<td>$7,884</td>
+<td>$25</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Ene 2021</td>
+<td>-234</td>
+<td>1,417</td>
+<td>$7,349</td>
+<td>$25</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Feb 2021</td>
+<td>-234</td>
+<td>1,323</td>
+<td>$6,808</td>
+<td>$25</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Mar 2021</td>
+<td>58</td>
+<td>1,619</td>
+<td>$8,662</td>
+<td>$22</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Abr 2021</td>
+<td>58</td>
+<td>1,500</td>
+<td>$8,330</td>
+<td>$22</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>May 2021</td>
+<td>-50</td>
+<td>1,938</td>
+<td>$10,516</td>
+<td>$23</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jun 2021</td>
+<td>-50</td>
+<td>2,362</td>
+<td>$13,318</td>
+<td>$23</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jul 2021</td>
+<td>684</td>
+<td>2,225</td>
+<td>$12,607</td>
+<td>$968</td>
+<td>92.9%</td>
+</tr>
+<tr>
+<td>Ago 2021</td>
+<td>684</td>
+<td>2,476</td>
+<td>$14,426</td>
+<td>$968</td>
+<td>93.7%</td>
+</tr>
+<tr>
+<td>Sep 2021</td>
+<td>2</td>
+<td>2,134</td>
+<td>$12,626</td>
+<td>$26</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Oct 2021</td>
+<td>2</td>
+<td>1,878</td>
+<td>$11,352</td>
+<td>$26</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Nov 2021</td>
+<td>291</td>
+<td>1,349</td>
+<td>$8,957</td>
+<td>$26</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Dic 2021</td>
+<td>291</td>
+<td>1,603</td>
+<td>$10,714</td>
+<td>$26</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Ene 2022</td>
+<td>525</td>
+<td>1,410</td>
+<td>$9,377</td>
+<td>$26</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Feb 2022</td>
+<td>525</td>
+<td>1,678</td>
+<td>$11,116</td>
+<td>$26</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Mar 2022</td>
+<td>-339</td>
+<td>2,309</td>
+<td>$16,604</td>
+<td>$24</td>
+<td>99.9%</td>
+</tr>
+<tr>
+<td>Abr 2022</td>
+<td>-339</td>
+<td>2,039</td>
+<td>$14,213</td>
+<td>$24</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>May 2022</td>
+<td>927</td>
+<td>2,247</td>
+<td>$15,433</td>
+<td>$24</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jun 2022</td>
+<td>927</td>
+<td>2,248</td>
+<td>$16,992</td>
+<td>$24</td>
+<td>99.9%</td>
+</tr>
+<tr>
+<td>Jul 2022</td>
+<td>623</td>
+<td>1,789</td>
+<td>$14,068</td>
+<td>$1,177</td>
+<td>92.3%</td>
+</tr>
+<tr>
+<td>Ago 2022</td>
+<td>623</td>
+<td>2,167</td>
+<td>$16,146</td>
+<td>$1,177</td>
+<td>93.2%</td>
+</tr>
+<tr>
+<td>Sep 2022</td>
+<td>-81</td>
+<td>2,050</td>
+<td>$16,354</td>
+<td>$27</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Oct 2022</td>
+<td>-81</td>
+<td>1,671</td>
+<td>$13,373</td>
+<td>$27</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Nov 2022</td>
+<td>114</td>
+<td>1,269</td>
+<td>$9,080</td>
+<td>$133</td>
+<td>98.6%</td>
+</tr>
+<tr>
+<td>Dic 2022</td>
+<td>114</td>
+<td>1,229</td>
+<td>$8,550</td>
+<td>$133</td>
+<td>98.5%</td>
+</tr>
+<tr>
+<td>Ene 2023</td>
+<td>394</td>
+<td>1,431</td>
+<td>$10,215</td>
+<td>$28</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Feb 2023</td>
+<td>394</td>
+<td>1,713</td>
+<td>$11,593</td>
+<td>$28</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Mar 2023</td>
+<td>-335</td>
+<td>1,813</td>
+<td>$11,544</td>
+<td>$26</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Abr 2023</td>
+<td>-335</td>
+<td>1,778</td>
+<td>$11,030</td>
+<td>$26</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>May 2023</td>
+<td>250</td>
+<td>1,965</td>
+<td>$11,784</td>
+<td>$269</td>
+<td>97.8%</td>
+</tr>
+<tr>
+<td>Jun 2023</td>
+<td>250</td>
+<td>2,401</td>
+<td>$14,218</td>
+<td>$269</td>
+<td>98.1%</td>
+</tr>
+<tr>
+<td>Jul 2023</td>
+<td>1,783</td>
+<td>2,492</td>
+<td>$14,850</td>
+<td>$5,998</td>
+<td>71.2%</td>
+</tr>
+<tr>
+<td>Ago 2023</td>
+<td>1,783</td>
+<td>2,414</td>
+<td>$14,858</td>
+<td>$0</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Sep 2023</td>
+<td>118</td>
+<td>2,221</td>
+<td>$13,719</td>
+<td>$201</td>
+<td>98.6%</td>
+</tr>
+<tr>
+<td>Oct 2023</td>
+<td>118</td>
+<td>1,297</td>
+<td>$8,084</td>
+<td>$201</td>
+<td>97.6%</td>
+</tr>
+<tr>
+<td>Nov 2023</td>
+<td>83</td>
+<td>1,161</td>
+<td>$7,216</td>
+<td>$100</td>
+<td>98.6%</td>
+</tr>
+<tr>
+<td>Dic 2023</td>
+<td>83</td>
+<td>1,150</td>
+<td>$7,396</td>
+<td>$100</td>
+<td>98.7%</td>
+</tr>
+<tr>
+<td>Ene 2024</td>
+<td>-478</td>
+<td>1,352</td>
+<td>$8,365</td>
+<td>$30</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Feb 2024</td>
+<td>-478</td>
+<td>1,651</td>
+<td>$10,068</td>
+<td>$30</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Mar 2024</td>
+<td>-175</td>
+<td>1,946</td>
+<td>$11,932</td>
+<td>$29</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Abr 2024</td>
+<td>-175</td>
+<td>1,917</td>
+<td>$11,256</td>
+<td>$29</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>May 2024</td>
+<td>934</td>
+<td>2,074</td>
+<td>$12,145</td>
+<td>$27</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jun 2024</td>
+<td>934</td>
+<td>1,919</td>
+<td>$11,295</td>
+<td>$27</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jul 2024</td>
+<td>804</td>
+<td>1,977</td>
+<td>$12,178</td>
+<td>$895</td>
+<td>93.2%</td>
+</tr>
+<tr>
+<td>Ago 2024</td>
+<td>804</td>
+<td>2,276</td>
+<td>$14,645</td>
+<td>$895</td>
+<td>94.2%</td>
+</tr>
+<tr>
+<td>Sep 2024</td>
+<td>225</td>
+<td>1,527</td>
+<td>$9,629</td>
+<td>$389</td>
+<td>96.1%</td>
+</tr>
+<tr>
+<td>Oct 2024</td>
+<td>225</td>
+<td>1,768</td>
+<td>$11,011</td>
+<td>$389</td>
+<td>96.6%</td>
+</tr>
+<tr>
+<td>Nov 2024</td>
+<td>-115</td>
+<td>1,456</td>
+<td>$9,693</td>
+<td>$31</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Dic 2024</td>
+<td>-115</td>
+<td>1,166</td>
+<td>$7,638</td>
+<td>$31</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Ene 2025</td>
+<td>-228</td>
+<td>1,248</td>
+<td>$8,761</td>
+<td>$31</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Feb 2025</td>
+<td>-228</td>
+<td>1,361</td>
+<td>$9,798</td>
+<td>$31</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Mar 2025</td>
+<td>-183</td>
+<td>2,115</td>
+<td>$15,167</td>
+<td>$29</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Abr 2025</td>
+<td>-183</td>
+<td>2,021</td>
+<td>$14,364</td>
+<td>$29</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>May 2025</td>
+<td>542</td>
+<td>1,935</td>
+<td>$13,809</td>
+<td>$28</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jun 2025</td>
+<td>542</td>
+<td>2,164</td>
+<td>$14,881</td>
+<td>$28</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Jul 2025</td>
+<td>849</td>
+<td>2,142</td>
+<td>$14,623</td>
+<td>$2,409</td>
+<td>85.9%</td>
+</tr>
+<tr>
+<td>Ago 2025</td>
+<td>849</td>
+<td>2,266</td>
+<td>$15,469</td>
+<td>$2,409</td>
+<td>86.5%</td>
+</tr>
+<tr>
+<td>Sep 2025</td>
+<td>147</td>
+<td>1,803</td>
+<td>$12,055</td>
+<td>$195</td>
+<td>98.4%</td>
+</tr>
+<tr>
+<td>Oct 2025</td>
+<td>147</td>
+<td>1,837</td>
+<td>$12,208</td>
+<td>$195</td>
+<td>98.4%</td>
+</tr>
+<tr>
+<td>Nov 2025</td>
+<td>-181</td>
+<td>1,385</td>
+<td>$9,297</td>
+<td>$33</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Dic 2025</td>
+<td>-181</td>
+<td>1,346</td>
+<td>$9,150</td>
+<td>$33</td>
+<td>99.6%</td>
+</tr>
+<tr>
+<td>Ene 2026</td>
+<td>-304</td>
+<td>1,473</td>
+<td>$10,377</td>
+<td>$32</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Feb 2026</td>
+<td>-304</td>
+<td>1,684</td>
+<td>$11,828</td>
+<td>$32</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>Mar 2026</td>
+<td>-420</td>
+<td>2,068</td>
+<td>$15,849</td>
+<td>$31</td>
+<td>99.8%</td>
+</tr>
+<tr>
+<td>Abr 2026</td>
+<td>-420</td>
+<td>1,481</td>
+<td>$10,308</td>
+<td>$31</td>
+<td>99.7%</td>
+</tr>
+<tr>
+<td>May 2026</td>
+<td>0</td>
+<td>1,949</td>
+<td>$14,119</td>
+<td>$0</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Jun 2026</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Jul 2026</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Ago 2026</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Sep 2026</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Oct 2026</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Nov 2026</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Dic 2026</td>
+<td>0</td>
+<td>0</td>
+<td>$0</td>
+<td>$0</td>
+<td>0.0%</td>
+</tr>
+
+</tbody>
+
+</table>
+
+<div class="footer">
+Reporte generado automáticamente por Genergy &middot; 17/6/2026
+</div>
+
 </div>
 
 <script>
 
 const labels = ["Ene 2017","Feb 2017","Mar 2017","Abr 2017","May 2017","Jun 2017","Jul 2017","Ago 2017","Sep 2017","Oct 2017","Nov 2017","Dic 2017","Ene 2018","Feb 2018","Mar 2018","Abr 2018","May 2018","Jun 2018","Jul 2018","Ago 2018","Sep 2018","Oct 2018","Nov 2018","Dic 2018","Ene 2019","Feb 2019","Mar 2019","Abr 2019","May 2019","Jun 2019","Jul 2019","Ago 2019","Sep 2019","Oct 2019","Nov 2019","Dic 2019","Ene 2020","Feb 2020","Mar 2020","Abr 2020","May 2020","Jun 2020","Jul 2020","Ago 2020","Sep 2020","Oct 2020","Nov 2020","Dic 2020","Ene 2021","Feb 2021","Mar 2021","Abr 2021","May 2021","Jun 2021","Jul 2021","Ago 2021","Sep 2021","Oct 2021","Nov 2021","Dic 2021","Ene 2022","Feb 2022","Mar 2022","Abr 2022","May 2022","Jun 2022","Jul 2022","Ago 2022","Sep 2022","Oct 2022","Nov 2022","Dic 2022","Ene 2023","Feb 2023","Mar 2023","Abr 2023","May 2023","Jun 2023","Jul 2023","Ago 2023","Sep 2023","Oct 2023","Nov 2023","Dic 2023","Ene 2024","Feb 2024","Mar 2024","Abr 2024","May 2024","Jun 2024","Jul 2024","Ago 2024","Sep 2024","Oct 2024","Nov 2024","Dic 2024","Ene 2025","Feb 2025","Mar 2025","Abr 2025","May 2025","Jun 2025","Jul 2025","Ago 2025","Sep 2025","Oct 2025","Nov 2025","Dic 2025","Ene 2026","Feb 2026","Mar 2026","Abr 2026","May 2026","Jun 2026","Jul 2026","Ago 2026","Sep 2026","Oct 2026","Nov 2026","Dic 2026"];
-
 const consumo = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,830,780,1174,1174,368.5,368.5,5.5,5.5,-193,-193,-349,-349,27.5,27.5,778,778,162,162,-376.5,-376.5,-296.5,-296.5,378,378,653,653,967,967,45.5,45.5,-75,-75,-234,-234,58,58,-49.5,-49.5,683.5,683.5,2,2,290.5,290.5,525,525,-338.5,-338.5,927,927,623,623,-80.5,-80.5,113.5,113.5,394,394,-335,-335,250,250,1782.5,1782.5,117.5,117.5,83,83,-477.5,-477.5,-174.5,-174.5,934,934,803.5,803.5,225,225,-114.5,-114.5,-228,-228,-182.5,-182.5,542,542,848.5,848.5,147,147,-180.5,-180.5,-304,-304,-419.5,-419.5,0,0,0,0,0,0,0,0];
-
 const produccion = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1715,2180,2390,2390,1490,1230,1150,1280,1310,1280,1320,2070,1710,2130,2190,2250,1720,1705.72,1339.95,1323.14,1280,1410,1540,1630,2034.92,2050,1937.8,2308.37,1493.68,1832.97,1254.58,1500,1416.89,1323.26,1619.1,1499.54,1937.52,2361.84,2224.79,2476.33,2134.15,1878,1349,1603,1410,1678,2309,2039,2247,2248,1789,2167,2050,1671,1269,1229,1431,1713,1813,1778,1965,2401,2492,2414,2221,1297,1161,1150,1352,1651,1946,1917,2074,1919,1977,2276,1527,1768,1456,1166,1248,1361,2115,2021,1935,2164,2142,2266,1803,1837,1385,1346,1473,1684,2068,1481,1949,0,0,0,0,0,0,0];
+const ahorro = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8450.9712,11308.7936,12689.2748,12772.446800000002,7781.256799999999,6423.4536,6029.6799999999985,6726.144,7587.362800000001,7085.4655999999995,6971.553599999999,10632.513599999998,8914.2984,11101.304399999999,11414.017199999998,11726.73,8964.4336,8890.0079536,6983.658606,6896.0469032,6078.7712,6663.4344,7122.3768,7544.292,9406.621192,9885.346,9319.577807999998,11115.170889199999,7389.832431999999,9387.372558,6330.610679999998,7883.939999999999,7348.5016204,6807.6433959999995,8662.055472,8330.304589599999,10516.1610528,13317.8489184,12606.995013999998,14425.909941599999,12625.631399999998,11352.05928,8957.14416,10714.323759999997,9376.894799999998,11116.34728,16603.649559999998,14212.72716,15433.20492,16991.64288,14068.051959999999,16145.623559999998,16353.506,13372.74564,9079.54272,8549.56308,10215.393839999999,11592.62472,11543.806119999997,11030.14304,11784.497999999998,14218.2418,14849.628639999997,14858.073439999998,13719.117,8083.785959999999,7215.940079999999,7395.695999999999,8365.41888,10067.996119999998,11932.404959999998,11256.470640000001,12144.68032,11294.926959999999,12177.529199999997,14644.967519999998,9628.895519999998,11011.174719999999,9692.94144,7637.906319999999,8761.359359999999,9797.78456,15166.9188,14363.893719999998,13808.7792,14880.702719999997,14622.5772,15469.075599999998,12055.290719999999,12208.04068,9297.394199999999,9149.5696,10376.81364,11828.079199999998,15849.40016,10307.759999999998,14118.9458,0,0,0,0,0,0,0];
 
 new Chart(
 document.getElementById('graficaPrincipal'),
 {
-type:'line',
+type:'bar',
 data:{
 labels:labels,
 datasets:[
 {
-label:'Consumo',
-data:consumo,
-borderWidth:2
+type:'bar',
+label:'Producción (kWh)',
+data:produccion,
+backgroundColor:'#5ca038',
+borderRadius:4
 },
 {
-label:'Producción',
-data:produccion,
-borderWidth:2
+type:'line',
+label:'Consumo (kWh)',
+data:consumo,
+borderColor:'#1f2937',
+backgroundColor:'transparent',
+borderWidth:2,
+tension:0.3,
+pointRadius:3
 }
 ]
 },
 options:{
 responsive:true,
-interaction:{
-mode:'index',
-intersect:false
+plugins:{ legend:{ position:'bottom' } },
+scales:{ y:{ beginAtZero:true } }
 }
+}
+);
+
+new Chart(
+document.getElementById('graficaAhorro'),
+{
+type:'bar',
+data:{
+labels:labels,
+datasets:[
+{
+label:'Ahorro (MXN)',
+data:ahorro,
+backgroundColor:'#8bc34a',
+borderRadius:4
+}
+]
+},
+options:{
+responsive:true,
+plugins:{ legend:{ display:false } },
+scales:{ y:{ beginAtZero:true } }
 }
 }
 );
