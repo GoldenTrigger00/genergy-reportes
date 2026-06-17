@@ -319,15 +319,19 @@ td{
 </div>
 
 <div class="chart-box">
-<div class="section-title">Consumo vs Producción Mensual (kWh)</div>
-<canvas id="graficaPrincipal"></canvas>
+<div class="section-title">Ahorro Acumulado</div>
+<canvas id="graficaAhorroAcumulado"></canvas>
 </div>
 
 <div class="chart-box">
-<div class="section-title">Ahorro Mensual (MXN)</div>
-<canvas id="graficaAhorro"></canvas>
+<div class="section-title">Producción Solar Anual</div>
+<canvas id="graficaProduccionAnual"></canvas>
 </div>
 
+<div class="chart-box">
+<div class="section-title">Consumo CFE vs Producción Solar</div>
+<canvas id="graficaComparativa"></canvas>
+</div>
 <div class="section-title">Historial Detallado</div>
 
 <table>
@@ -1319,64 +1323,91 @@ Reporte generado automáticamente por Genergy &middot; 17/6/2026
 
 <script>
 
-const labels = ["Ene 2017","Feb 2017","Mar 2017","Abr 2017","May 2017","Jun 2017","Jul 2017","Ago 2017","Sep 2017","Oct 2017","Nov 2017","Dic 2017","Ene 2018","Feb 2018","Mar 2018","Abr 2018","May 2018","Jun 2018","Jul 2018","Ago 2018","Sep 2018","Oct 2018","Nov 2018","Dic 2018","Ene 2019","Feb 2019","Mar 2019","Abr 2019","May 2019","Jun 2019","Jul 2019","Ago 2019","Sep 2019","Oct 2019","Nov 2019","Dic 2019","Ene 2020","Feb 2020","Mar 2020","Abr 2020","May 2020","Jun 2020","Jul 2020","Ago 2020","Sep 2020","Oct 2020","Nov 2020","Dic 2020","Ene 2021","Feb 2021","Mar 2021","Abr 2021","May 2021","Jun 2021","Jul 2021","Ago 2021","Sep 2021","Oct 2021","Nov 2021","Dic 2021","Ene 2022","Feb 2022","Mar 2022","Abr 2022","May 2022","Jun 2022","Jul 2022","Ago 2022","Sep 2022","Oct 2022","Nov 2022","Dic 2022","Ene 2023","Feb 2023","Mar 2023","Abr 2023","May 2023","Jun 2023","Jul 2023","Ago 2023","Sep 2023","Oct 2023","Nov 2023","Dic 2023","Ene 2024","Feb 2024","Mar 2024","Abr 2024","May 2024","Jun 2024","Jul 2024","Ago 2024","Sep 2024","Oct 2024","Nov 2024","Dic 2024","Ene 2025","Feb 2025","Mar 2025","Abr 2025","May 2025","Jun 2025","Jul 2025","Ago 2025","Sep 2025","Oct 2025","Nov 2025","Dic 2025","Ene 2026","Feb 2026","Mar 2026","Abr 2026","May 2026","Jun 2026","Jul 2026","Ago 2026","Sep 2026","Oct 2026","Nov 2026","Dic 2026"];
-const consumo = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,830,780,1174,1174,368.5,368.5,5.5,5.5,-193,-193,-349,-349,27.5,27.5,778,778,162,162,-376.5,-376.5,-296.5,-296.5,378,378,653,653,967,967,45.5,45.5,-75,-75,-234,-234,58,58,-49.5,-49.5,683.5,683.5,2,2,290.5,290.5,525,525,-338.5,-338.5,927,927,623,623,-80.5,-80.5,113.5,113.5,394,394,-335,-335,250,250,1782.5,1782.5,117.5,117.5,83,83,-477.5,-477.5,-174.5,-174.5,934,934,803.5,803.5,225,225,-114.5,-114.5,-228,-228,-182.5,-182.5,542,542,848.5,848.5,147,147,-180.5,-180.5,-304,-304,-419.5,-419.5,0,0,0,0,0,0,0,0];
-const produccion = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1715,2180,2390,2390,1490,1230,1150,1280,1310,1280,1320,2070,1710,2130,2190,2250,1720,1705.72,1339.95,1323.14,1280,1410,1540,1630,2034.92,2050,1937.8,2308.37,1493.68,1832.97,1254.58,1500,1416.89,1323.26,1619.1,1499.54,1937.52,2361.84,2224.79,2476.33,2134.15,1878,1349,1603,1410,1678,2309,2039,2247,2248,1789,2167,2050,1671,1269,1229,1431,1713,1813,1778,1965,2401,2492,2414,2221,1297,1161,1150,1352,1651,1946,1917,2074,1919,1977,2276,1527,1768,1456,1166,1248,1361,2115,2021,1935,2164,2142,2266,1803,1837,1385,1346,1473,1684,2068,1481,1949,0,0,0,0,0,0,0];
-const ahorro = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8450.9712,11308.7936,12689.2748,12772.446800000002,7781.256799999999,6423.4536,6029.6799999999985,6726.144,7587.362800000001,7085.4655999999995,6971.553599999999,10632.513599999998,8914.2984,11101.304399999999,11414.017199999998,11726.73,8964.4336,8890.0079536,6983.658606,6896.0469032,6078.7712,6663.4344,7122.3768,7544.292,9406.621192,9885.346,9319.577807999998,11115.170889199999,7389.832431999999,9387.372558,6330.610679999998,7883.939999999999,7348.5016204,6807.6433959999995,8662.055472,8330.304589599999,10516.1610528,13317.8489184,12606.995013999998,14425.909941599999,12625.631399999998,11352.05928,8957.14416,10714.323759999997,9376.894799999998,11116.34728,16603.649559999998,14212.72716,15433.20492,16991.64288,14068.051959999999,16145.623559999998,16353.506,13372.74564,9079.54272,8549.56308,10215.393839999999,11592.62472,11543.806119999997,11030.14304,11784.497999999998,14218.2418,14849.628639999997,14858.073439999998,13719.117,8083.785959999999,7215.940079999999,7395.695999999999,8365.41888,10067.996119999998,11932.404959999998,11256.470640000001,12144.68032,11294.926959999999,12177.529199999997,14644.967519999998,9628.895519999998,11011.174719999999,9692.94144,7637.906319999999,8761.359359999999,9797.78456,15166.9188,14363.893719999998,13808.7792,14880.702719999997,14622.5772,15469.075599999998,12055.290719999999,12208.04068,9297.394199999999,9149.5696,10376.81364,11828.079199999998,15849.40016,10307.759999999998,14118.9458,0,0,0,0,0,0,0];
+const anios = ["2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"];
+const produccionAnual = [0,13825,20348.81,20272.32,21823.42,22106,21836,21029,21623,8655];
+const consumoAnual = [0,4706,98,3344,1501,3539,4584,2392,1893,-1447];
+const ahorroAcumulado = [0,72182.0208,179349.41346279997,277476.759422,403141.33802679996,564444.8375867999,700951.7862267998,830807.0988267998,980388.4851867998,1042869.4839867998];
 
 new Chart(
-document.getElementById('graficaPrincipal'),
-{
-type:'bar',
-data:{
-labels:labels,
-datasets:[
-{
-type:'bar',
-label:'Producción (kWh)',
-data:produccion,
-backgroundColor:'#5ca038',
-borderRadius:4
-},
+document.getElementById('graficaAhorroAcumulado'),
 {
 type:'line',
-label:'Consumo (kWh)',
-data:consumo,
-borderColor:'#1f2937',
-backgroundColor:'transparent',
-borderWidth:2,
-tension:0.3,
-pointRadius:3
+data:{
+labels:anios,
+datasets:[
+{
+label:'Ahorro acumulado (MXN)',
+data:ahorroAcumulado,
+borderColor:'#5ca038',
+backgroundColor:'#5ca038',
+borderWidth:3,
+tension:0.3
 }
 ]
 },
 options:{
 responsive:true,
-plugins:{ legend:{ position:'bottom' } },
-scales:{ y:{ beginAtZero:true } }
+plugins:{
+legend:{
+position:'bottom'
+}
+}
 }
 }
 );
 
 new Chart(
-document.getElementById('graficaAhorro'),
+document.getElementById('graficaProduccionAnual'),
 {
 type:'bar',
 data:{
-labels:labels,
+labels:anios,
 datasets:[
 {
-label:'Ahorro (MXN)',
-data:ahorro,
-backgroundColor:'#8bc34a',
+label:'Producción Solar (kWh)',
+data:produccionAnual,
+backgroundColor:'#5ca038',
 borderRadius:4
 }
 ]
 },
 options:{
 responsive:true,
-plugins:{ legend:{ display:false } },
-scales:{ y:{ beginAtZero:true } }
+plugins:{
+legend:{
+position:'bottom'
+}
+}
+}
+}
+);
+
+new Chart(
+document.getElementById('graficaComparativa'),
+{
+type:'bar',
+data:{
+labels:anios,
+datasets:[
+{
+label:'Consumo CFE',
+data:consumoAnual,
+backgroundColor:'#1f2937'
+},
+{
+label:'Producción Solar',
+data:produccionAnual,
+backgroundColor:'#5ca038'
+}
+]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+position:'bottom'
+}
+}
 }
 }
 );
