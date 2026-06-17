@@ -8,6 +8,7 @@
 <title>Reporte Genergy - Luis y Katia </title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
 <style>
 
@@ -194,26 +195,6 @@ body{
   color:#5ca038;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-bottom:25px;
-}
-
-th{
-  background:#5ca038;
-  color:white;
-  padding:10px;
-  font-size:13px;
-}
-
-td{
-  padding:8px;
-  border:1px solid #ddd;
-  text-align:center;
-  font-size:13px;
-}
-
 .footer{
   margin-top:10px;
   padding:18px;
@@ -328,72 +309,10 @@ td{
 <canvas id="graficaAnual"></canvas>
 </div>
 
+<div class="chart-box">
 <div class="section-title">Consumo Mensual por Año</div>
-
-<table>
-
-<thead>
-<tr>
-<th>Mes</th>
-<th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th>
-</tr>
-</thead>
-
-<tbody>
-
-
-<tr>
-<td>Ene</td>
-<td>0</td><td>0</td><td>-193</td><td>-297</td><td>-234</td><td>525</td><td>394</td><td>-478</td><td>-228</td><td>-304</td>
-</tr>
-<tr>
-<td>Feb</td>
-<td>0</td><td>0</td><td>-193</td><td>-297</td><td>-234</td><td>525</td><td>394</td><td>-478</td><td>-228</td><td>-304</td>
-</tr>
-<tr>
-<td>Mar</td>
-<td>0</td><td>0</td><td>-349</td><td>378</td><td>58</td><td>-339</td><td>-335</td><td>-175</td><td>-183</td><td>-420</td>
-</tr>
-<tr>
-<td>Abr</td>
-<td>0</td><td>0</td><td>-349</td><td>378</td><td>58</td><td>-339</td><td>-335</td><td>-175</td><td>-183</td><td>-420</td>
-</tr>
-<tr>
-<td>May</td>
-<td>0</td><td>830</td><td>28</td><td>653</td><td>-50</td><td>927</td><td>250</td><td>934</td><td>542</td><td>0</td>
-</tr>
-<tr>
-<td>Jun</td>
-<td>0</td><td>780</td><td>28</td><td>653</td><td>-50</td><td>927</td><td>250</td><td>934</td><td>542</td><td>0</td>
-</tr>
-<tr>
-<td>Jul</td>
-<td>0</td><td>1,174</td><td>778</td><td>967</td><td>684</td><td>623</td><td>1,783</td><td>804</td><td>849</td><td>0</td>
-</tr>
-<tr>
-<td>Ago</td>
-<td>0</td><td>1,174</td><td>778</td><td>967</td><td>684</td><td>623</td><td>1,783</td><td>804</td><td>849</td><td>0</td>
-</tr>
-<tr>
-<td>Sep</td>
-<td>0</td><td>369</td><td>162</td><td>46</td><td>2</td><td>-81</td><td>118</td><td>225</td><td>147</td><td>0</td>
-</tr>
-<tr>
-<td>Oct</td>
-<td>0</td><td>369</td><td>162</td><td>46</td><td>2</td><td>-81</td><td>118</td><td>225</td><td>147</td><td>0</td>
-</tr>
-<tr>
-<td>Nov</td>
-<td>0</td><td>6</td><td>-377</td><td>-75</td><td>291</td><td>114</td><td>83</td><td>-115</td><td>-181</td><td>0</td>
-</tr>
-<tr>
-<td>Dic</td>
-<td>0</td><td>6</td><td>-377</td><td>-75</td><td>291</td><td>114</td><td>83</td><td>-115</td><td>-181</td><td>0</td>
-</tr>
-
-</tbody>
-
-</table>
+<canvas id="graficaConsumoMensual"></canvas>
+</div>
 
 <div class="footer">
 Reporte generado automáticamente por Genergy &middot; 17/6/2026
@@ -403,11 +322,17 @@ Reporte generado automáticamente por Genergy &middot; 17/6/2026
 
 <script>
 
+if (window.ChartDataLabels) {
+  Chart.register(window.ChartDataLabels);
+}
+
 const labelsAcumulado = ["Ene 2017","Feb 2017","Mar 2017","Abr 2017","May 2017","Jun 2017","Jul 2017","Ago 2017","Sep 2017","Oct 2017","Nov 2017","Dic 2017","Ene 2018","Feb 2018","Mar 2018","Abr 2018","May 2018","Jun 2018","Jul 2018","Ago 2018","Sep 2018","Oct 2018","Nov 2018","Dic 2018","Ene 2019","Feb 2019","Mar 2019","Abr 2019","May 2019","Jun 2019","Jul 2019","Ago 2019","Sep 2019","Oct 2019","Nov 2019","Dic 2019","Ene 2020","Feb 2020","Mar 2020","Abr 2020","May 2020","Jun 2020","Jul 2020","Ago 2020","Sep 2020","Oct 2020","Nov 2020","Dic 2020","Ene 2021","Feb 2021","Mar 2021","Abr 2021","May 2021","Jun 2021","Jul 2021","Ago 2021","Sep 2021","Oct 2021","Nov 2021","Dic 2021","Ene 2022","Feb 2022","Mar 2022","Abr 2022","May 2022","Jun 2022","Jul 2022","Ago 2022","Sep 2022","Oct 2022","Nov 2022","Dic 2022","Ene 2023","Feb 2023","Mar 2023","Abr 2023","May 2023","Jun 2023","Jul 2023","Ago 2023","Sep 2023","Oct 2023","Nov 2023","Dic 2023","Ene 2024","Feb 2024","Mar 2024","Abr 2024","May 2024","Jun 2024","Jul 2024","Ago 2024","Sep 2024","Oct 2024","Nov 2024","Dic 2024","Ene 2025","Feb 2025","Mar 2025","Abr 2025","May 2025","Jun 2025","Jul 2025","Ago 2025","Sep 2025","Oct 2025","Nov 2025","Dic 2025","Ene 2026","Feb 2026","Mar 2026","Abr 2026","May 2026","Jun 2026","Jul 2026","Ago 2026","Sep 2026","Oct 2026","Nov 2026","Dic 2026"];
 const ahorroAcumulado = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8451,19760,32449,45221,53003,59426,65456,72182,79769,86855,93826,104459,113373,124475,135889,147615,156580,165470,172453,179349,185428,192092,199214,206758,216165,226050,235370,246485,253875,263262,269593,277477,284825,291633,300295,308625,319141,332459,345066,359492,372118,383470,392427,403141,412518,423635,440238,454451,469884,486876,500944,517089,533443,546816,555895,564445,574660,586253,597797,608827,620611,634830,649679,664537,678256,686340,693556,700952,709317,719385,731318,742574,754719,766014,778191,792836,802465,813476,823169,830807,839568,849366,864533,878897,892706,907587,922209,937678,949733,961942,971239,980388,990765,1002593,1018443,1028751,1042869,1042869,1042869,1042869,1042869,1042869,1042869,1042869];
 const anios = [2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
 const consumoPorAnio = [0,4706,98,3344,1501,3539,4584,2392,1893,-1447];
 const produccionPorAnio = [0,13825,20348.81,20272.32,21823.42,22106,21836,21029,21623,8655];
+const mesesLabels = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+const datasetsConsumoMensual = [{"label":"Consumo total Energía (kWh) 2017","data":[0,0,0,0,0,0,0,0,0,0,0,0],"backgroundColor":"#4472c4"},{"label":"Consumo total Energía (kWh) 2018","data":[0,0,0,0,830,780,1174,1174,368.5,368.5,5.5,5.5],"backgroundColor":"#a9d18e"},{"label":"Consumo total Energía (kWh) 2019","data":[-193,-193,-349,-349,27.5,27.5,778,778,162,162,-376.5,-376.5],"backgroundColor":"#1f3864"},{"label":"Consumo total Energía (kWh) 2020","data":[-296.5,-296.5,378,378,653,653,967,967,45.5,45.5,-75,-75],"backgroundColor":"#5fb8d9"},{"label":"Consumo total Energía (kWh) 2021","data":[-234,-234,58,58,-49.5,-49.5,683.5,683.5,2,2,290.5,290.5],"backgroundColor":"#ed7d31"},{"label":"Consumo total Energía (kWh) 2022","data":[525,525,-338.5,-338.5,927,927,623,623,-80.5,-80.5,113.5,113.5],"backgroundColor":"#70ad47"},{"label":"Consumo total Energía (kWh) 2023","data":[394,394,-335,-335,250,250,1782.5,1782.5,117.5,117.5,83,83],"backgroundColor":"#4472c4"},{"label":"Consumo total Energía (kWh) 2024","data":[-477.5,-477.5,-174.5,-174.5,934,934,803.5,803.5,225,225,-114.5,-114.5],"backgroundColor":"#a9d18e"},{"label":"Consumo total Energía (kWh) 2025","data":[-228,-228,-182.5,-182.5,542,542,848.5,848.5,147,147,-180.5,-180.5],"backgroundColor":"#1f3864"},{"label":"Consumo total Energía (kWh) 2026","data":[-304,-304,-419.5,-419.5,0,0,0,0,0,0,0,0],"backgroundColor":"#5fb8d9"}];
 
 new Chart(
 document.getElementById('graficaAhorroAcumulado'),
@@ -430,7 +355,7 @@ pointRadius:2
 },
 options:{
 responsive:true,
-plugins:{ legend:{ display:false } },
+plugins:{ legend:{ display:false }, datalabels:{ display:false } },
 scales:{ y:{ beginAtZero:true } }
 }
 }
@@ -447,25 +372,50 @@ datasets:[
 label:'Consumo CFE (kWh)',
 data:consumoPorAnio,
 backgroundColor:'#1f2937',
-barPercentage:1.0,
-categoryPercentage:0.6
+stack:'total',
+barPercentage:0.6,
+categoryPercentage:0.7
 },
 {
 label:'Producción Solar (kWh)',
 data:produccionPorAnio,
 backgroundColor:'#5ca038',
-barPercentage:1.0,
-categoryPercentage:0.6
+stack:'total',
+barPercentage:0.6,
+categoryPercentage:0.7
 }
 ]
 },
 options:{
 responsive:true,
-plugins:{ legend:{ position:'bottom' } },
-scales:{
-x:{ grid:{ display:false } },
-y:{ beginAtZero:true }
+plugins:{
+legend:{ position:'bottom' },
+datalabels:{
+color:'#ffffff',
+font:{ weight:'bold', size:11 },
+formatter: value => value ? value.toLocaleString('es-MX', { maximumFractionDigits:0 }) : ''
 }
+},
+scales:{
+x:{ stacked:true, grid:{ display:false } },
+y:{ stacked:true, beginAtZero:true }
+}
+}
+}
+);
+
+new Chart(
+document.getElementById('graficaConsumoMensual'),
+{
+type:'bar',
+data:{
+labels:mesesLabels,
+datasets:datasetsConsumoMensual
+},
+options:{
+responsive:true,
+plugins:{ legend:{ position:'bottom' }, datalabels:{ display:false } },
+scales:{ y:{ beginAtZero:true } }
 }
 }
 );
