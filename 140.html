@@ -189,6 +189,15 @@ body{
   margin-bottom:25px;
 }
 
+.chart-box canvas{
+  width:100% !important;
+}
+
+.chart-tall{
+  height:380px;
+  position:relative;
+}
+
 .section-title{
   margin-bottom:15px;
   font-size:18px;
@@ -301,27 +310,22 @@ body{
 
 <div class="chart-box">
 <div class="section-title">Ahorro Acumulado</div>
-<canvas id="graficaAhorroAcumulado"></canvas>
+<div class="chart-tall"><canvas id="graficaAhorroAcumulado"></canvas></div>
 </div>
 
 <div class="chart-box">
 <div class="section-title">Consumo CFE vs Producción Solar (Anual)</div>
-<canvas id="graficaAnual"></canvas>
+<div class="chart-tall"><canvas id="graficaAnual"></canvas></div>
 </div>
 
 <div class="chart-box">
 <div class="section-title">Consumo Mensual</div>
-<canvas id="graficaConsumoMensual"></canvas>
-</div>
-
-<div class="chart-box">
-<div class="section-title">Cumplimiento de Producción Solar</div>
-<canvas id="graficaCumplimiento"></canvas>
+<div class="chart-tall"><canvas id="graficaConsumoMensual"></canvas></div>
 </div>
 
 <div class="chart-box">
 <div class="section-title">Producción y Garantía Mensual</div>
-<canvas id="graficaGarantia"></canvas>
+<div class="chart-tall"><canvas id="graficaGarantia"></canvas></div>
 </div>
 
 <div class="footer">
@@ -343,14 +347,11 @@ const consumoPorAnio = [0,4706,98,3344,1501,3539,4584,2392,1893,-1447];
 const produccionPorAnio = [0,13825,20348.81,20272.32,21823.42,22106,21836,21029,21623,8655];
 const mesesLabels = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
 const datasetsConsumoMensual = [{"label":"Consumo total Energía (kWh) 2017","data":[0,0,0,0,0,0,0,0,0,0,0,0],"backgroundColor":"#5b9bd5","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2018","data":[0,0,0,0,830,780,1174,1174,368.5,368.5,5.5,5.5],"backgroundColor":"#a9d18e","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2019","data":[-193,-193,-349,-349,27.5,27.5,778,778,162,162,-376.5,-376.5],"backgroundColor":"#264478","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2020","data":[-296.5,-296.5,378,378,653,653,967,967,45.5,45.5,-75,-75],"backgroundColor":"#70cad1","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2021","data":[-234,-234,58,58,-49.5,-49.5,683.5,683.5,2,2,290.5,290.5],"backgroundColor":"#ed7d31","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2022","data":[525,525,-338.5,-338.5,927,927,623,623,-80.5,-80.5,113.5,113.5],"backgroundColor":"#70ad47","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2023","data":[394,394,-335,-335,250,250,1782.5,1782.5,117.5,117.5,83,83],"backgroundColor":"#5b9bd5","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2024","data":[-477.5,-477.5,-174.5,-174.5,934,934,803.5,803.5,225,225,-114.5,-114.5],"backgroundColor":"#a9d18e","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2025","data":[-228,-228,-182.5,-182.5,542,542,848.5,848.5,147,147,-180.5,-180.5],"backgroundColor":"#264478","barPercentage":1,"categoryPercentage":0.85},{"label":"Consumo total Energía (kWh) 2026","data":[-304,-304,-419.5,-419.5,0,0,0,0,0,0,0,0],"backgroundColor":"#70cad1","barPercentage":1,"categoryPercentage":0.85}];
-const labelsCumplimiento = ["Ene 2017","Feb 2017","Mar 2017","Abr 2017","May 2017","Jun 2017","Jul 2017","Ago 2017","Sep 2017","Oct 2017","Nov 2017","Dic 2017","Ene 2018","Feb 2018","Mar 2018","Abr 2018","May 2018","Jun 2018","Jul 2018","Ago 2018","Sep 2018","Oct 2018","Nov 2018","Dic 2018","Ene 2019","Feb 2019","Mar 2019","Abr 2019","May 2019","Jun 2019","Jul 2019","Ago 2019","Sep 2019","Oct 2019","Nov 2019","Dic 2019","Ene 2020","Feb 2020","Mar 2020","Abr 2020","May 2020","Jun 2020","Jul 2020","Ago 2020","Sep 2020","Oct 2020","Nov 2020","Dic 2020","Ene 2021","Feb 2021","Mar 2021","Abr 2021","May 2021","Jun 2021","Jul 2021","Ago 2021","Sep 2021","Oct 2021","Nov 2021","Dic 2021","Ene 2022","Feb 2022","Mar 2022","Abr 2022","May 2022","Jun 2022","Jul 2022","Ago 2022","Sep 2022","Oct 2022","Nov 2022","Dic 2022","Ene 2023","Feb 2023","Mar 2023","Abr 2023","May 2023","Jun 2023","Jul 2023","Ago 2023","Sep 2023","Oct 2023","Nov 2023","Dic 2023","Ene 2024","Feb 2024","Mar 2024","Abr 2024","May 2024","Jun 2024","Jul 2024","Ago 2024","Sep 2024","Oct 2024","Nov 2024","Dic 2024","Ene 2025","Feb 2025","Mar 2025","Abr 2025","May 2025","Jun 2025","Jul 2025","Ago 2025","Sep 2025","Oct 2025","Nov 2025","Dic 2025","Ene 2026","Feb 2026","Mar 2026","Abr 2026","May 2026","Jun 2026","Jul 2026","Ago 2026","Sep 2026","Oct 2026","Nov 2026","Dic 2026"];
-const produccionEstimadaArr = [1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014];
-const produccionRealArr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1715,2180,2390,2390,1490,1230,1150,1280,1310,1280,1320,2070,1710,2130,2190,2250,1720,1705.72,1339.95,1323.14,1280,1410,1540,1630,2034.92,2050,1937.8,2308.37,1493.68,1832.97,1254.58,1500,1416.89,1323.26,1619.1,1499.54,1937.52,2361.84,2224.79,2476.33,2134.15,1878,1349,1603,1410,1678,2309,2039,2247,2248,1789,2167,2050,1671,1269,1229,1431,1713,1813,1778,1965,2401,2492,2414,2221,1297,1161,1150,1352,1651,1946,1917,2074,1919,1977,2276,1527,1768,1456,1166,1248,1361,2115,2021,1935,2164,2142,2266,1803,1837,1385,1346,1473,1684,2068,1481,1949,0,0,0,0,0,0,0];
-const cumplimientoArr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,87.8,99.9,111.6,103.1,82.5,74.4,88.8,96.7,108.1,95.3,80.7,129,87.6,97.6,102.2,97,95.2,103.1,103.5,99.9,105.7,105,94.1,101.5,104.2,93.9,90.5,99.6,82.7,110.8,96.9,113.3,117,98.5,99,93.4,99.2,108.2,103.8,106.8,118.1,113.5,104.2,121,116.4,124.9,141.1,127,115.1,103,83.5,93.5,113.5,101,98,92.8,118.1,127.5,110.8,110.8,100.6,110,116.3,104.1,122.9,78.4,89.7,86.8,111.6,122.9,118.9,119.4,106.2,87.9,92.3,98.2,84.5,106.9,112.5,88,103,101.3,129.3,125.9,99.1,99.1,100,97.7,99.8,111,107,101.6,121.6,125.4,126.4,92.3,99.8,0,0,0,0,0,0,0];
 const labelsGarantia = ["Ene 2017","Feb 2017","Mar 2017","Abr 2017","May 2017","Jun 2017","Jul 2017","Ago 2017","Sep 2017","Oct 2017","Nov 2017","Dic 2017","Ene 2018","Feb 2018","Mar 2018","Abr 2018","May 2018","Jun 2018","Jul 2018","Ago 2018","Sep 2018","Oct 2018","Nov 2018","Dic 2018","Ene 2019","Feb 2019","Mar 2019","Abr 2019","May 2019","Jun 2019","Jul 2019","Ago 2019","Sep 2019","Oct 2019","Nov 2019","Dic 2019","Ene 2020","Feb 2020","Mar 2020","Abr 2020","May 2020","Jun 2020","Jul 2020","Ago 2020","Sep 2020","Oct 2020","Nov 2020","Dic 2020","Ene 2021","Feb 2021","Mar 2021","Abr 2021","May 2021","Jun 2021","Jul 2021","Ago 2021","Sep 2021","Oct 2021","Nov 2021","Dic 2021","Ene 2022","Feb 2022","Mar 2022","Abr 2022","May 2022","Jun 2022","Jul 2022","Ago 2022","Sep 2022","Oct 2022","Nov 2022","Dic 2022","Ene 2023","Feb 2023","Mar 2023","Abr 2023","May 2023","Jun 2023","Jul 2023","Ago 2023","Sep 2023","Oct 2023","Nov 2023","Dic 2023","Ene 2024","Feb 2024","Mar 2024","Abr 2024","May 2024","Jun 2024","Jul 2024","Ago 2024","Sep 2024","Oct 2024","Nov 2024","Dic 2024","Ene 2025","Feb 2025","Mar 2025","Abr 2025","May 2025","Jun 2025","Jul 2025","Ago 2025","Sep 2025","Oct 2025","Nov 2025","Dic 2025","Ene 2026","Feb 2026","Mar 2026","Abr 2026","May 2026","Jun 2026","Jul 2026","Ago 2026","Sep 2026","Oct 2026","Nov 2026","Dic 2026"];
 const produccionEstimadaGarantia = [1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014,1211.3064,1343.1096,1636.1676,1605.258,1952.5536000000002,2182.626,2142.3852,2318.6574,1806.462,1654.2468000000001,1294.704,1324.3014];
 const produccionRealGarantia = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1715,2180,2390,2390,1490,1230,1150,1280,1310,1280,1320,2070,1710,2130,2190,2250,1720,1705.72,1339.95,1323.14,1280,1410,1540,1630,2034.92,2050,1937.8,2308.37,1493.68,1832.97,1254.58,1500,1416.89,1323.26,1619.1,1499.54,1937.52,2361.84,2224.79,2476.33,2134.15,1878,1349,1603,1410,1678,2309,2039,2247,2248,1789,2167,2050,1671,1269,1229,1431,1713,1813,1778,1965,2401,2492,2414,2221,1297,1161,1150,1352,1651,1946,1917,2074,1919,1977,2276,1527,1768,1456,1166,1248,1361,2115,2021,1935,2164,2142,2266,1803,1837,1385,1346,1473,1684,2068,1481,1949,0,0,0,0,0,0,0];
 const cumplimientoGarantia = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,87.8,99.9,111.6,103.1,82.5,74.4,88.8,96.7,108.1,95.3,80.7,129,87.6,97.6,102.2,97,95.2,103.1,103.5,99.9,105.7,105,94.1,101.5,104.2,93.9,90.5,99.6,82.7,110.8,96.9,113.3,117,98.5,99,93.4,99.2,108.2,103.8,106.8,118.1,113.5,104.2,121,116.4,124.9,141.1,127,115.1,103,83.5,93.5,113.5,101,98,92.8,118.1,127.5,110.8,110.8,100.6,110,116.3,104.1,122.9,78.4,89.7,86.8,111.6,122.9,118.9,119.4,106.2,87.9,92.3,98.2,84.5,106.9,112.5,88,103,101.3,129.3,125.9,99.1,99.1,100,97.7,99.8,111,107,101.6,121.6,125.4,126.4,92.3,99.8,0,0,0,0,0,0,0];
+const metaGarantia = [100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100];
 
 new Chart(
 document.getElementById('graficaAhorroAcumulado'),
@@ -373,8 +374,12 @@ pointRadius:2
 },
 options:{
 responsive:true,
+maintainAspectRatio:false,
 plugins:{ legend:{ display:false }, datalabels:{ display:false } },
-scales:{ y:{ beginAtZero:true } }
+scales:{
+x:{ ticks:{ maxRotation:45, minRotation:45, font:{ size:11 } } },
+y:{ beginAtZero:true, ticks:{ callback: v => v.toLocaleString('es-MX') } }
+}
 }
 }
 );
@@ -406,6 +411,7 @@ categoryPercentage:0.7
 },
 options:{
 responsive:true,
+maintainAspectRatio:false,
 plugins:{
 legend:{ position:'bottom' },
 datalabels:{
@@ -416,7 +422,7 @@ formatter: value => value ? value.toLocaleString('es-MX', { maximumFractionDigit
 },
 scales:{
 x:{ stacked:true, grid:{ display:false } },
-y:{ stacked:true, beginAtZero:true }
+y:{ stacked:true, beginAtZero:true, ticks:{ callback: v => v.toLocaleString('es-MX') } }
 }
 }
 }
@@ -432,6 +438,7 @@ datasets:datasetsConsumoMensual
 },
 options:{
 responsive:true,
+maintainAspectRatio:false,
 plugins:{
 legend:{
 position:'bottom',
@@ -461,61 +468,6 @@ grid:{ color:'#e5e7eb' }
 );
 
 new Chart(
-document.getElementById('graficaCumplimiento'),
-{
-data:{
-labels:labelsCumplimiento,
-datasets:[
-{
-type:'bar',
-label:'Producción Estimada (kWh)',
-data:produccionEstimadaArr,
-backgroundColor:'#5ca038',
-yAxisID:'y'
-},
-{
-type:'bar',
-label:'Producción Real (kWh)',
-data:produccionRealArr,
-backgroundColor:'#2563eb',
-yAxisID:'y'
-},
-{
-type:'line',
-label:'Cumplimiento (%)',
-data:cumplimientoArr,
-borderColor:'#f59e0b',
-backgroundColor:'transparent',
-borderWidth:2,
-tension:0.3,
-pointRadius:3,
-yAxisID:'y1'
-}
-]
-},
-options:{
-responsive:true,
-plugins:{ legend:{ position:'bottom' }, datalabels:{ display:false } },
-scales:{
-y:{
-type:'linear',
-position:'left',
-beginAtZero:true,
-title:{ display:true, text:'kWh' }
-},
-y1:{
-type:'linear',
-position:'right',
-beginAtZero:true,
-grid:{ drawOnChartArea:false },
-title:{ display:true, text:'%' }
-}
-}
-}
-}
-);
-
-new Chart(
 document.getElementById('graficaGarantia'),
 {
 data:{
@@ -525,7 +477,9 @@ datasets:[
 type:'bar',
 label:'Producción Estimada (kWh)',
 data:produccionEstimadaGarantia,
-backgroundColor:'#5ca038',
+backgroundColor:'#a9d18e',
+borderRadius:3,
+order:2,
 yAxisID:'y'
 },
 {
@@ -533,6 +487,8 @@ type:'bar',
 label:'Producción Real (kWh)',
 data:produccionRealGarantia,
 backgroundColor:'#2563eb',
+borderRadius:3,
+order:2,
 yAxisID:'y'
 },
 {
@@ -540,28 +496,61 @@ type:'line',
 label:'Cumplimiento (%)',
 data:cumplimientoGarantia,
 borderColor:'#f59e0b',
-backgroundColor:'transparent',
+backgroundColor:'#f59e0b',
 borderWidth:2,
 tension:0.3,
 pointRadius:3,
+pointBackgroundColor:'#f59e0b',
+order:0,
+yAxisID:'y1'
+},
+{
+type:'line',
+label:'Meta 100%',
+data:metaGarantia,
+borderColor:'#9ca3af',
+borderDash:[6,4],
+borderWidth:1,
+pointRadius:0,
+order:1,
 yAxisID:'y1'
 }
 ]
 },
 options:{
 responsive:true,
-plugins:{ legend:{ position:'bottom' }, datalabels:{ display:false } },
+maintainAspectRatio:false,
+plugins:{
+legend:{
+position:'bottom',
+labels:{ boxWidth:14, padding:14, font:{ size:11 } }
+},
+datalabels:{
+display: ctx => ctx.dataset.label === 'Cumplimiento (%)',
+align:'top',
+color:'#92400e',
+font:{ size:10, weight:'bold' },
+formatter: v => Number(v).toFixed(0) + '%'
+}
+},
 scales:{
+x:{
+grid:{ display:false },
+ticks:{ maxRotation:45, minRotation:45, font:{ size:10 } }
+},
 y:{
 type:'linear',
 position:'left',
 beginAtZero:true,
-title:{ display:true, text:'kWh' }
+title:{ display:true, text:'kWh' },
+grid:{ color:'#e5e7eb' },
+ticks:{ callback: v => v.toLocaleString('es-MX') }
 },
 y1:{
 type:'linear',
 position:'right',
 beginAtZero:true,
+suggestedMax:120,
 grid:{ drawOnChartArea:false },
 title:{ display:true, text:'%' }
 }
